@@ -1,26 +1,26 @@
 # GitHub Actions build matrix for Sofle halves as dongle peripherals.
-# First target to try for the Raytac MDBT50Q-CX nRF52840 USB-C dongle.
-# If GitHub Actions rejects it, try the legacy form nrf52840dongle_nrf52840.
+# ZMK/Zephyr main currently exposes nice!nano as "nice_nano".
+# The MDBT50Q-CX dongle uses the Raytac nRF52840 board target.
 ---
 include:
-  - board: nice_nano_v2
+  - board: nice_nano
     shield: sofle_left
     cmake-args: -DCONFIG_ZMK_SPLIT=y -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
     artifact-name: sofle_left_peripheral
 
-  - board: nice_nano_v2
+  - board: nice_nano
     shield: sofle_right
     cmake-args: -DCONFIG_ZMK_SPLIT=y -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
     artifact-name: sofle_right_peripheral
 
-  - board: nrf52840dongle/nrf52840
+  - board: raytac_mdbt50q_db_40
     shield: sofle_dongle
     artifact-name: sofle_dongle_central
 
-  - board: nice_nano_v2
+  - board: nice_nano
     shield: settings_reset
-    artifact-name: settings_reset_nice_nano_v2
+    artifact-name: settings_reset_nice_nano
 
-  - board: nrf52840dongle/nrf52840
+  - board: raytac_mdbt50q_db_40
     shield: settings_reset
     artifact-name: settings_reset_dongle
