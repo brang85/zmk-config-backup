@@ -1,5 +1,16 @@
 name: Build ZMK firmware
-on: [push, pull_request, workflow_dispatch]
+
+on:
+  push:
+    paths:
+      - "build.yaml"
+      - "boards/**"
+      - "sofle.keymap"
+      - "sofle.conf"
+      - "west.yml"
+      - ".github/workflows/build.yml"
+  pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
