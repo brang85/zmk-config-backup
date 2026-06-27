@@ -1,19 +1,26 @@
-# This file generates the GitHub Actions matrix
-# For simple board + shield combinations, add them
-# to the top level board and shield arrays, for more
-# control, add individual board + shield combinations to
-# the `include` property, e.g:
-#
-# board: [ "nice_nano_v2" ]
-# shield: [ "corne_left", "corne_right" ]
-# include:
-#   - board: bdn9_rev2
-#   - board: nice_nano_v2
-#     shield: reviung41
-#
+# GitHub Actions build matrix for Sofle halves as dongle peripherals.
+# First target to try for the Raytac MDBT50Q-CX nRF52840 USB-C dongle.
+# If GitHub Actions rejects it, try the legacy form nrf52840dongle_nrf52840.
 ---
-sofle_left_peripheral
-sofle_right_peripheral
-sofle_dongle_central
-settings_reset_nice_nano_v2
-settings_reset_dongle
+include:
+  - board: nice_nano_v2
+    shield: sofle_left
+    cmake-args: -DCONFIG_ZMK_SPLIT=y -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
+    artifact-name: sofle_left_peripheral
+
+  - board: nice_nano_v2
+    shield: sofle_right
+    cmake-args: -DCONFIG_ZMK_SPLIT=y -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
+    artifact-name: sofle_right_peripheral
+
+  - board: nrf52840dongle/nrf52840
+    shield: sofle_dongle
+    artifact-name: sofle_dongle_central
+
+  - board: nice_nano_v2
+    shield: settings_reset
+    artifact-name: settings_reset_nice_nano_v2
+
+  - board: nrf52840dongle/nrf52840
+    shield: settings_reset
+    artifact-name: settings_reset_dongle
