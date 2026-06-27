@@ -13,6 +13,18 @@
     tapping-term-ms = <200>;
 };
 
+&left_encoder {
+    status = "disabled";
+};
+
+&right_encoder {
+    status = "disabled";
+};
+
+&sensors {
+    status = "disabled";
+};
+
 / {
     macros {
         snip: snip {
@@ -125,4 +137,3 @@
         };
     };
 };
-
